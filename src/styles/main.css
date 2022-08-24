@@ -2,9 +2,16 @@ body {
     background-color: lemonchiffon;
 }
 
+body{
+    height: 100%;
+}
+
 /*gives flexing properties*/
 div.container {
     display: flex;
+    text-align: center;
+    margin: 0 auto;
+
 }
 
 /* 25% width */
@@ -15,4 +22,10 @@ div.sidecol {
 /* 50% width */
 div.maincol {
     width: 50%;
+}
+
+textarea {
+    width: 90%;
+    resize: none;
+    height: 50vh;
 }

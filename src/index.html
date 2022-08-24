@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Library Imports -->
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graph Coloring Visualization</title>
-    <link rel="stylesheet" href="styles/main.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Inited scripts on load -->
+
+    <script type="text/javascript" src="scripts/data_passing.js"></script>
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="styles/main.css" />
     <style type="text/css">
         #mynetwork {
             width: 95%;
@@ -14,6 +19,12 @@
             border: 1px solid lightgray;
         }
     </style>
+
+    <!-- Boilerplate -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Coloring Visualization</title>
 </head>
 <body>
     <div class="container">
@@ -39,15 +50,31 @@
             <p>
                 Input Graph Here. Codeforces/OJ style input
             </p>
-            <input type="file">
+            <details>
+                <summary> In case you're not familiar...</summary>
+                <p>
+                    First line is a single integer <b>n</b>, denoting the number 
+                    of nodes. 
+                </p>
+                <p>
+                    All following lines are of the form <b>u v</b>, denoting an edge between 
+                    node <b>u</b> and node <b>v</b>
+                </p>
+            </details>
+            <textarea id="GraphTextBox">
+5
+1 2
+2 3
+3 4
+4 5</textarea>
 
 
         </div>
         <div class="maincol">
-            <div id="mynetwork">
-                
-            </div>
-            <script type="text/javascript" src = "scripts/graph_drawer.js"></script>
+            <div id="mynetwork"></div>
+            <script type="text/javascript">
+                getFromGraphTextBox(); generateGraph();
+            </script>
         </div>
         <div class="sidecol">
             <p>
