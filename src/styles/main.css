@@ -1,5 +1,6 @@
 body {
     background-color: lemonchiffon;
+    font-family: sans-serif;
 }
 
 body{
@@ -11,7 +12,6 @@ div.container {
     display: flex;
     text-align: center;
     margin: 0 auto;
-
 }
 
 /* 25% width */
@@ -28,4 +28,11 @@ textarea {
     width: 90%;
     resize: none;
     height: 50vh;
+}
+
+
+/*Specific, Custom Rules*/
+
+#AboutSection{
+    text-align: left;
 }

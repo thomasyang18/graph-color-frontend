@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="styles/main.css" />
     <style type="text/css">
         #mynetwork {
-            width: 95%;
-            height: 90%;
+            width: 100%;
+            height: 60vh;
             border: 1px solid lightgray;
         }
     </style>
@@ -28,15 +28,15 @@
 </head>
 <body>
     <div class="container">
-        <div class="sidecol">
+        <div class="sidecol" id="AboutSection">
             <p>
                 Short Explanation of Project
             </p>
         </div>
         <div class="maincol">
-            <p>
-                Graph Colorer
-            </p>
+            <button onclick="getFromGraphTextBox(); generateGraph();">
+                Regenerate Graph!
+            </button>
         </div>
         <div class="sidecol">
             <p>
@@ -71,16 +71,30 @@
 
         </div>
         <div class="maincol">
-            <div id="mynetwork"></div>
-            <script type="text/javascript">
-                getFromGraphTextBox(); generateGraph();
-            </script>
+            <div id="mynetwork">
+                <script type="text/javascript">
+                    getFromGraphTextBox(); generateGraph();
+                </script>
+            </div>
+            <div id="benchmarks">
+                <p>abong</p>
+            </div>
+            
         </div>
         <div class="sidecol">
             <p>
                 Input file here
             </p>
-            <input type="file">
+            <details>
+                <summary>
+                    Syntax for Function
+                </summary>
+                <p>function (nodes, edges) => {some transformation on said nodes and edges}</p>
+                <p>Nodes are an array of objects with fields {id, label, color}</p>
+                <p>Edges are an array of objects with fields {from, to}. Despite the name, they are 
+                bidirectional.</p>
+            </details>
+            <textarea id="FunctionTextBox"></textarea>
 
         </div>
     </div>

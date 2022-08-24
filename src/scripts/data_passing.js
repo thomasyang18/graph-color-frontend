@@ -12,10 +12,8 @@ function getFromGraphTextBox() {
   globNodes = [...Array(num_nodes).keys()].map(function (e) {
     return { id: e + 1, label: `${e + 1}` }; // because this is zero indexed
   });
-  console.log(globNodes);
   for (var i = 1; i < ints.length; i += 2) {
     globEdges.push({ from: ints[i], to: ints[i + 1] });
-    console.log(ints[i] + " " + ints[i + 1]);
   }
 }
 
