@@ -62,7 +62,10 @@
                 </p>
             </details>
             <div id="listOfGraphs"></div>
+            <div class="fancySubmit">
+            <h3> Add a graph!</h3>
             <input type="file" id="submitGraph">
+            </div>
             <script>
                 $("#submitGraph").change(function(e) {
                     appendGraph(e)                    
@@ -72,11 +75,7 @@
 
         </div>
         <div class="maincol">
-            <div id="mynetwork">
-                <script type="text/javascript">
-                    getFromGraphTextBox(); generateGraph();
-                </script>
-            </div>
+            <div id="mynetwork"></div>
             <div id="benchmarks">
                 <p>abong</p>
             </div>

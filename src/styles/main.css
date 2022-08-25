@@ -6,6 +6,17 @@ body {
 body{
     height: 100%;
 }
+/* button styling*/
+
+input[type="file"]{
+    position: relative;
+    opacity: 0;
+}
+
+div.fancySubmit{
+    background-color: darkorange;
+    border-radius: 5px;
+}
 
 /*gives flexing properties*/
 div.container {
