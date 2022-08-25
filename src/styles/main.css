@@ -16,12 +16,12 @@ div.container {
 
 /* 25% width */
 div.sidecol {
-    width: 25%;
+    width: 20vw;
 }
 
 /* 50% width */
 div.maincol {
-    width: 50%;
+    width: 100%;
 }
 
 textarea {
@@ -30,6 +30,15 @@ textarea {
     height: 50vh;
 }
 
+/* data box*/
+
+div.dataBox {
+    background-color:palegreen;
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: 5px;
+}
 
 /*Specific, Custom Rules*/
 

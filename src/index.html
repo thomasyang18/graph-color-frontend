@@ -7,7 +7,9 @@
 
     <!-- Inited scripts on load -->
 
-    <script type="text/javascript" src="scripts/data_passing.js"></script>
+    <script type="text/javascript" src="scripts/buttons.js"></script>
+    <script type="text/javascript" src="scripts/graphs.js"></script>
+
 
     <!-- CSS -->
 
@@ -34,9 +36,7 @@
             </p>
         </div>
         <div class="maincol">
-            <button onclick="getFromGraphTextBox(); generateGraph();">
-                Regenerate Graph!
-            </button>
+            <h1>Graph Coloring</h1>
         </div>
         <div class="sidecol">
             <p>
@@ -61,12 +61,13 @@
                     node <b>u</b> and node <b>v</b>
                 </p>
             </details>
-            <textarea id="GraphTextBox">
-5
-1 2
-2 3
-3 4
-4 5</textarea>
+            <div id="listOfGraphs"></div>
+            <input type="file" id="submitGraph">
+            <script>
+                $("#submitGraph").change(function(e) {
+                    appendGraph(e)                    
+                })
+            </script>
 
 
         </div>
@@ -94,7 +95,6 @@
                 <p>Edges are an array of objects with fields {from, to}. Despite the name, they are 
                 bidirectional.</p>
             </details>
-            <textarea id="FunctionTextBox"></textarea>
 
         </div>
     </div>
