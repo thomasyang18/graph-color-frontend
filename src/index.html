@@ -9,7 +9,7 @@
 
     <script type="text/javascript" src="scripts/buttons.js"></script>
     <script type="text/javascript" src="scripts/graphs.js"></script>
-
+    <script type="text/javascript" src="scripts/programs.js"></script>
 
     <!-- CSS -->
 
@@ -61,11 +61,17 @@
                     node <b>u</b> and node <b>v</b>
                 </p>
             </details>
+
+
             <div id="listOfGraphs"></div>
-            <div class="fancySubmit">
-            <h3> Add a graph!</h3>
-            <input type="file" id="submitGraph">
+
+
+            <!-- Sketchy fake button for input-->
+            <div class="fancySubmit" style="text-align: center;">
+            <h3 style="position: absolute; width:100%; margin-top: 0px;"> Add a graph!</h3>
+            <input type="file" multiple id="submitGraph" style="position: relative;">
             </div>
+
             <script>
                 $("#submitGraph").change(function(e) {
                     appendGraph(e)                    
@@ -94,6 +100,20 @@
                 <p>Edges are an array of objects with fields {from, to}. Despite the name, they are 
                 bidirectional.</p>
             </details>
+
+            <div id="listOfPrograms"></div>
+            
+            <!-- Sketchy fake button for input-->
+            <div class="fancySubmit" style="text-align: center;">
+                <h3 style="position: absolute; width:100%; margin-top: 0px;"> Add a Program!</h3>
+                <input type="file" multiple id="submitProgram" style="position: relative;">
+            </div>
+            
+            <script>
+                $("#submitProgram").change(function (e) {
+                    appendProgram(e)
+                })
+            </script>
 
         </div>
     </div>

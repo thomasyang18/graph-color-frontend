@@ -1,5 +1,3 @@
-/* Data structures representing graphs */
-
 class Graph {
   constructor(filename, text) {
     this.filename = filename;
@@ -7,18 +5,64 @@ class Graph {
     let ints = text.split(/\W+/).map((e) => parseInt(e));
     this.num_nodes = ints[0];
     this.edges = [];
+    this.adj = [...Array(this.num_nodes + 1).keys()].map(function (e) {
+      return [];
+    }); /* adjacency list, dummy 0 index */
+
     this.nodes = [...Array(this.num_nodes).keys()].map(function (e) {
-      return { id: e + 1, label: `${e + 1}` }; // because this is zero indexed
+      return { id: e + 1 }; // because this is zero indexed
     });
     for (let i = 1; i < ints.length; i += 2) {
-      this.edges.push({ from: ints[i], to: ints[i + 1] });
+      this.addEdge(ints[i], ints[i + 1]);
+    }
+  }
+
+  reset() {
+    this.nodes = [...Array(this.num_nodes).keys()].map(function (e) {
+      return { id: e + 1 }; // Removing colors
+    });
+  }
+
+  isNeighbors(u, v) {
+    return this.adj[u].includes(v);
+  }
+
+  neighbors(u) {
+    return this.adj[u];
+  }
+
+  addEdge(u, v) {
+    if (!this.isNeighbors(u, v)) {
+      this.edges.push({ from: u, to: v });
+      this.adj[u].push(v);
+      this.adj[v].push(u);
     }
   }
 }
 
 function generateGraph(graph) {
+  // id
+  let graphcopy = [...graph.nodes];
+
+  graphcopy.map((e) => {
+    if (!Number.isInteger(e["color"])) e["color"] = e["id"];
+    e["label"] = `${e["color"]}`;
+    return e;
+  });
+
+  // color gen
+
+  const saturation = "85%";
+  const lightness = "70%";
+  graphcopy.map((e) => {
+    e["color"] = `hsl(${
+      (e["color"] * 137) % 360
+    }, ${saturation}, ${lightness})`;
+  });
+
   // create an array with nodes
-  let nodes = new vis.DataSet(graph.nodes);
+
+  let nodes = new vis.DataSet(graphcopy);
 
   // create an array with edges
   let edges = new vis.DataSet(graph.edges);
@@ -57,8 +101,8 @@ function modifyGraphList(op, graph) {
 
   $(".graphBox").click(function (e) {
     selectedGraph = $(this).index();
+    selectedProgram = -1;
     parent.children().each(function (i, obj) {
-      console.log("Yo " + i + " " + selectedGraph);
       obj.style.backgroundColor = "palegreen";
       if (selectedGraph === i) obj.style.backgroundColor = "red";
       generateGraph(graphs[selectedGraph]);
@@ -69,9 +113,11 @@ function modifyGraphList(op, graph) {
 }
 
 function appendGraph(event) {
-  const file = getFile(event);
-  readFileContent(file).then((content) => {
-    const graph = new Graph(file.name, content);
-    modifyGraphList("push", graph);
-  });
+  const files = getFiles(event);
+  files.forEach((file) =>
+    readFileContent(file).then((content) => {
+      const graph = new Graph(file.name, content);
+      modifyGraphList("push", graph);
+    })
+  );
 }

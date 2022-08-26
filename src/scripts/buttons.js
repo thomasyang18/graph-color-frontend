@@ -1,7 +1,9 @@
-function getFile(event) {
+function getFiles(event) {
   const input = event.target;
   if ("files" in input && input.files.length > 0) {
-    return input.files[0];
+    const ret = [...input.files];
+    input.value = "";
+    return ret;
   }
   return null;
 }
