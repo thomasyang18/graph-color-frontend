@@ -1,16 +1,20 @@
 class Graph {
   constructor(filename, text) {
+    // Everything is zero indexed
     this.filename = filename;
 
-    let ints = text.split(/\W+/).map((e) => parseInt(e));
+    let ints = text
+      .trim()
+      .split(/\W+/)
+      .map((e) => parseInt(e));
     this.num_nodes = ints[0];
     this.edges = [];
-    this.adj = [...Array(this.num_nodes + 1).keys()].map(function (e) {
+    this.adj = [...Array(this.num_nodes).keys()].map(function (e) {
       return [];
-    }); /* adjacency list, dummy 0 index */
+    });
 
     this.nodes = [...Array(this.num_nodes).keys()].map(function (e) {
-      return { id: e + 1 }; // because this is zero indexed
+      return { id: e };
     });
     for (let i = 1; i < ints.length; i += 2) {
       this.addEdge(ints[i], ints[i + 1]);
@@ -19,7 +23,7 @@ class Graph {
 
   reset() {
     this.nodes = [...Array(this.num_nodes).keys()].map(function (e) {
-      return { id: e + 1 }; // Removing colors
+      return { id: e }; // Removing colors
     });
   }
 
@@ -41,14 +45,20 @@ class Graph {
 }
 
 function generateGraph(graph) {
-  // id
+  // If elements have no color, set them to their id
   let graphcopy = [...graph.nodes];
 
   graphcopy.map((e) => {
     if (!Number.isInteger(e["color"])) e["color"] = e["id"];
-    e["label"] = `${e["color"]}`;
+    e["label"] = `${e["id"]}`;
     return e;
   });
+
+  // check correctness of color gen
+
+  let wrongEdge = graph.edges.find(
+    (edge) => graphcopy[edge["from"]]["color"] == graphcopy[edge["to"]]["color"]
+  );
 
   // color gen
 
@@ -79,6 +89,12 @@ function generateGraph(graph) {
 
   // initialize your network!
   let network = new vis.Network(container, data, options);
+
+  if (wrongEdge != undefined) {
+    container.prepend(
+      `Your graph is incorrect! Example: ${wrongEdge["to"]} ${wrongEdge["from"]}`
+    );
+  }
 }
 
 let graphs = [];
@@ -100,13 +116,23 @@ function modifyGraphList(op, graph) {
   });
 
   $(".graphBox").click(function (e) {
+    if (selectedGraph == $(this).index()) return;
     selectedGraph = $(this).index();
     selectedProgram = -1;
     parent.children().each(function (i, obj) {
       obj.style.backgroundColor = "palegreen";
-      if (selectedGraph === i) obj.style.backgroundColor = "red";
-      generateGraph(graphs[selectedGraph]);
+      if (selectedGraph === i) {
+        obj.style.backgroundColor = "red";
+        generateGraph(graphs[selectedGraph]);
+      }
     });
+
+    // reset program state, should maybe refactor
+    $("#listOfPrograms")
+      .children()
+      .each(function (i, obj) {
+        obj.style.backgroundColor = "palegreen";
+      });
   });
 
   selectedGraph = -1;

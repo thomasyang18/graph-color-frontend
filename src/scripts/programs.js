@@ -25,6 +25,7 @@ function modifyProgramList(op, program) {
   });
 
   $(".programBox").click(function (e) {
+    if (selectedProgram == $(this).index()) return;
     if (selectedGraph != -1) {
       selectedProgram = $(this).index();
     }
